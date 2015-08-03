@@ -2,8 +2,8 @@
 var makeDancer = function(top, left, timeBetweenSteps){
 
   // use jQuery to create an HTML <span> tag
-  this.$node = $('<span class="dancer"></span>');
-
+  this.$node = $('<span></span>');
+  this._timeBetweenSteps = timeBetweenSteps;
   this.step();
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
   // this one sets the position to some random default point within the body
@@ -14,13 +14,13 @@ var makeDancer = function(top, left, timeBetweenSteps){
 makeDancer.prototype.step = function(){
   // the basic dancer doesn't do anything interesting at all on each step,
   // it just schedules the next step
-  debugger;
+
   var context = this;
+
   //line 20 is broken
   //solution may involve bind()
-  //what about the second argument in setTimeout??
-  //is it correctly referenced?
-  setTimeout(function(){context.step();}, this.timeBetweenSteps);
+
+  setTimeout(function(){context.step();}, this._timeBetweenSteps);
 };
 
 makeDancer.prototype.setPosition = function(top, left){
@@ -32,4 +32,12 @@ makeDancer.prototype.setPosition = function(top, left){
     left: left
   };
   this.$node.css(styleSettings);
+};
+
+makeDancer.prototype.lineUp = function() {
+  //we need to modify styleSettings
+  //in relation to each other
+  //window.dancers = []
+
+
 };

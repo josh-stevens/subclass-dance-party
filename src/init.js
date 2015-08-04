@@ -56,9 +56,11 @@ $(document).ready(function(){
         var prevDancerTop = dancers[dancers.length-2]._top;
         var prevDancerLeft= dancers[dancers.length-2]._left;
 
+        var orbitRadius = (Math.random() * 30) + 30;
+
         //make random sometime in the future
-        var newDancerTop = prevDancerTop - 30;
-        var newDancerLeft = prevDancerLeft - 30;
+        var newDancerTop = prevDancerTop - orbitRadius;
+        var newDancerLeft = prevDancerLeft - orbitRadius;
 
         // Place orbiter near previous dancer
         dancers[dancers.length-1].$node.css({top:newDancerTop, left:newDancerLeft});

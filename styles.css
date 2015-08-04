@@ -44,3 +44,17 @@ body, a:link, a:visited, a:active{
   border:10px solid green;
   position:absolute;
 }
+
+.orbiter {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid white;
+  position:absolute;
+
+  -webkit-animation: myOrbit 4s linear infinite;
+}
+
+@-webkit-keyframes myOrbit {
+    from { -webkit-transform: rotate(0deg) translateX(150px) rotate(0deg); }
+    to   { -webkit-transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}

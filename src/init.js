@@ -16,9 +16,11 @@ $(document).ready(function(){
      * to the stage.
      */
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    console.log(dancerMakerFunctionName);
 
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
+    console.log(dancerMakerFunction);
 
     // make a dancer with a random position
 
@@ -27,9 +29,44 @@ $(document).ready(function(){
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
-    $('body').append(dancer.$node);
 
     window.dancers.push(dancer);
+
+    $('body').append(dancer.$node);
+
+    $(".rotater").on("mouseenter", function(event) {
+      $(this).animate({height:"30px", width:"30px"});
+    });
+
+    $(".rotater").on("mouseout", function(event) {
+      $(this).animate({height:"0px", width:"0px"});
+    });
+
+    //add an event upon orbiter button push
+    //will change the class of the last-added dancer
+    //thereby, hopefully, making the new orbiter
+    //track the last-added dancer
+
+
+
+    $('body').on('DOMNodeInserted', '.orbiter', function(event){
+
+
+        // Get coordinates of most recently inserted dancer
+        var prevDancerTop = dancers[dancers.length-2]._top;
+        var prevDancerLeft= dancers[dancers.length-2]._left;
+
+        //make random sometime in the future
+        var newDancerTop = prevDancerTop - 30;
+        var newDancerLeft = prevDancerLeft - 30;
+
+        // Place orbiter near previous dancer
+        dancers[dancers.length-1].$node.css({top:newDancerTop, left:newDancerLeft});
+        dancers[dancers.length-1]._left = newDancerLeft;
+        dancers[dancers.length-1]._top = newDancerTop;
+
+
+    })
 
   });
 
@@ -39,12 +76,16 @@ $(".lineUpButton").on("click", function(event){
 
   var nextPos = 10;
 
-  for (var i = 0; i < window.dancers.length; i++) {
-    window.dancers[i].$node.css({top:50, left:nextPos});
+  for (var i = 0; i < dancers.length; i++) {
+    dancers[i].$node.css({top:50, left:nextPos});
+    dancers[i]._left = nextPos;
+    dancers[i]._top = 50;
     nextPos += 25;
   }
 
   });
+
+
 
 });
 
